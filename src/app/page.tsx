@@ -1,12 +1,15 @@
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-const Page=() => {
-    return (
-        <div>
-          <Button variant="new">
-            Click Me
-          </Button>
-          </div>
-    );
+import { prisma } from "@/lib/db";
+
+const Page = async () => {
+
+  const users = await prisma.user.findMany();
+
+  return (
+    <div>
+      <pre>{JSON.stringify(users, null, 2)}</pre>
+      <p>Total Users: {users.length}</p>
+    </div>
+  );
 };
+
 export default Page;
